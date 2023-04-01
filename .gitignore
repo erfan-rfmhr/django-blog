@@ -1,0 +1,6 @@
+.idea/
+db.sqlite3
+manage.py
+Pipfile
+Pipfile.lock
+__pycache__/
