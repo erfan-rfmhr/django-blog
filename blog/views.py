@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from .forms import PostForm
 from .models import Post
@@ -29,7 +30,7 @@ class PostDetailView(generic.DetailView):
 #     return render(request, 'blog\create_post.html', context={'form': new_form})
 
 
-class PostCreateView(generic.CreateView):
+class PostCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = PostForm
     template_name = 'blog\create_post.html'
 
@@ -42,7 +43,7 @@ class PostCreateView(generic.CreateView):
 #         return redirect(to='post_detail', pk=pk)
 #     return render(request, 'blog\create_post.html', context={'form': form})
 
-class PostUpdateView(generic.UpdateView):
+class PostUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'blog\create_post.html'
@@ -57,7 +58,7 @@ class PostUpdateView(generic.UpdateView):
 #     return render(request, 'blog\delete_post.html', context={'post': post})
 
 
-class PostDeleteView(generic.DeleteView):
+class PostDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Post
     template_name = 'blog\delete_post.html'
     success_url = reverse_lazy('posts_list')
